@@ -7,8 +7,8 @@ import {useState, useEffect} from 'react';
 import SearchBar from './SearchBar'
 import SongCard from './SongCard';
 
-const CLIENT_ID = process.env.clientID;
-const CLIENT_SECRET = process.env.clientSecret
+const CLIENT_ID = process.env.NEXT_PUBLIC_clientID;
+const CLIENT_SECRET = process.env.NEXT_PUBLIC_clientSecret
 
 const HomePage = () => {
   const [searchInput, setSearchInput] = useState("");
@@ -27,7 +27,7 @@ const HomePage = () => {
     fetch('https://accounts.spotify.com/api/token', authParameters)
     .then(result => result.json())
     .then(data => setAccessToken(data.access_token))
-  }, [])
+  }, []);
 
   useEffect(() => {
     search();
@@ -44,8 +44,16 @@ const HomePage = () => {
 
     var artistID = await fetch('https://api.spotify.com/v1/search?q=' + searchInput + '&type=artist,album,track', searchParameters)
       .then(response => response.json())
-      .then(data=> {return data.artists.items[0].id})
-
+      .then(data=> {
+        if (data.artists?.items?.length > 0) {
+          return data.artists.items[0].id;
+        } else {
+          return null;
+        }
+      });
+    
+    setSearchInformation([]);
+    
     var filterType;
     if (selectedFilter === "song") {
       filterType = "track";
@@ -55,21 +63,23 @@ const HomePage = () => {
       filterType = "artist";
     }
 
-    var searchUrl = `https://api.spotify.com/v1/search?q=${searchInput}&type=${filterType}`;
+    if(artistID !== null) {
+      var searchUrl = `https://api.spotify.com/v1/search?q=${searchInput}&type=${filterType}`;
 
-    var searchData = await fetch(searchUrl, searchParameters)
-    .then(response => response.json())
-    .then(data => {
-      if (selectedFilter === "song") {
-        return data.tracks.items;
-      } else if (selectedFilter === "album") {
-        return data.albums.items;
-      } else if (selectedFilter === "artist") {
-        return data.artists.items;
-      }
+      var searchData = await fetch(searchUrl, searchParameters)
+        .then(response => response.json())
+        .then(data => {
+        if (selectedFilter === "song") {
+          return data.tracks.items;
+        } else if (selectedFilter === "album") {
+          return data.albums.items;
+        } else if (selectedFilter === "artist") {
+          return data.artists.items;
+        }
     });
 
     setSearchInformation(searchData);
+    }
   }
 
   const handleSearchChange = (event) => {
