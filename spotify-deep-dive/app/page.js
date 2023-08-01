@@ -29,6 +29,10 @@ const HomePage = () => {
     .then(data => setAccessToken(data.access_token))
   }, [])
 
+  useEffect(() => {
+    search();
+  }, [selectedFilter]);
+
   async function search() {
     var searchParameters= {
       method: 'GET',
@@ -88,9 +92,27 @@ const HomePage = () => {
         </div>
         <div className ="flex items-center justify-center py-2 ">
           <h1>Filter Type: </h1>
-          <button className={`mx-1 px-2 bg-green-500 text-white rounded-md h-10 ${selectedFilter === "song" ? "bg-green-700" : ""}`} onClick={() => setSelectedFilter("song")}>Song</button>
-          <button className={`mx-1 px-2 bg-green-500 text-white rounded-md h-10 ${selectedFilter === "album" ? "bg-green-700" : ""}`} onClick={() => setSelectedFilter("album")}>Album</button>
-          <button className={`mx-1 px-2 bg-green-500 text-white rounded-md h-10 ${selectedFilter === "artist" ? "bg-green-700" : ""}`} onClick={() => setSelectedFilter("artist")}>Artist</button>
+          <button className={`mx-1 px-2 bg-green-500 text-white rounded-md h-10 ${selectedFilter === "song" ? "bg-green-700" : ""}`}
+            onClick={() => {
+              setSelectedFilter("song");
+              search();
+              }}>
+            Song
+          </button>
+          <button className={`mx-1 px-2 bg-green-500 text-white rounded-md h-10 ${selectedFilter === "album" ? "bg-green-700" : ""}`}
+            onClick={() => {
+              setSelectedFilter("album");
+              search();
+              }}>
+            Album
+          </button>
+          <button className={`mx-1 px-2 bg-green-500 text-white rounded-md h-10 ${selectedFilter === "artist" ? "bg-green-700" : ""}`}
+            onClick={() => {
+              setSelectedFilter("artist");
+              search();
+              }}>
+            Artist
+          </button>
         </div>
         <div className="flex flex-wrap justify-center gap-4">
           {searchInformation.map((currentSearch, index) => (
