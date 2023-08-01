@@ -8,7 +8,7 @@ import SearchBar from './SearchBar'
 import SongCard from './SongCard';
 
 const CLIENT_ID = process.env.clientID;
-const CLIENT_SECRET = process.env.clientSecretS
+const CLIENT_SECRET = process.env.clientSecret
 
 const HomePage = () => {
   const [searchInput, setSearchInput] = useState("");
