@@ -11,7 +11,7 @@ const SearchBar = ({ onChange, onEnterPress }) => {
             <input
             type = "text"
             placeholder = "Search for an artist..."
-            className="py-2 px-4 border border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-blue-200 focus:outline-none"
+            className="py-2 px-4 border border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-green-200 focus:outline-none w-full"
             onChange = {onChange}
             onKeyDown = {handleKeyDown}
             />
