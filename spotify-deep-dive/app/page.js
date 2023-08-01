@@ -7,8 +7,8 @@ import {useState, useEffect} from 'react';
 import SearchBar from './SearchBar'
 import SongCard from './SongCard';
 
-const CLIENT_ID = "d4febb455f484ee5bf03438c18517601";
-const CLIENT_SECRET = "c6ae03a57d6c442bb8ce73ecd3d4ea66";
+const CLIENT_ID = process.env.clientID;
+const CLIENT_SECRET = process.env.clientSecretS
 
 const HomePage = () => {
   const [searchInput, setSearchInput] = useState("");
