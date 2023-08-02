@@ -70,14 +70,21 @@ const HomePage = () => {
         .then(response => response.json())
         .then(data => {
         if (selectedFilter === "song") {
-          return data.tracks.items;
+          return data.tracks.items.map((track) => ({
+            id: track.id,
+            name: track.name,
+            artists: track.artists,
+            previewUrl: track.preview_url,
+            album: track.album,
+          }));
         } else if (selectedFilter === "album") {
           return data.albums.items;
         } else if (selectedFilter === "artist") {
           return data.artists.items;
         }
     });
-
+    console.log(searchData);
+    
     setSearchInformation(searchData);
     }
   }
