@@ -84,7 +84,7 @@ const HomePage = () => {
         }
     });
     console.log(searchData);
-    
+
     setSearchInformation(searchData);
     }
   }
@@ -94,49 +94,46 @@ const HomePage = () => {
   }
 
   return (
-    <div className="bg-green-950 px-10 min-h-screen">
-      <Head>
-        <title>Spotify Deep Dive</title>
-      </Head>
-      
-      <main>
-        <nav className="py-2">
-          <h1 className="text-center text-3xl">Spotify Deep Dive</h1>
-        </nav>
-        <div className="flex items-center justify-center mt-4">
-          <SearchBar onChange={handleSearchChange} onEnterPress = {search} />
-          <button className=" ml-2 px-2 bg-green-500 text-white rounded-md h-10" onClick = {search}>Search</button>
-        </div>
-        <div className ="flex items-center justify-center py-2 ">
-          <h1>Filter Type: </h1>
-          <button className={`mx-1 px-2 bg-green-500 text-white rounded-md h-10 ${selectedFilter === "song" ? "bg-green-700" : ""}`}
-            onClick={() => {
-              setSelectedFilter("song");
-              search();
-              }}>
-            Song
-          </button>
-          <button className={`mx-1 px-2 bg-green-500 text-white rounded-md h-10 ${selectedFilter === "album" ? "bg-green-700" : ""}`}
-            onClick={() => {
-              setSelectedFilter("album");
-              search();
-              }}>
-            Album
-          </button>
-          <button className={`mx-1 px-2 bg-green-500 text-white rounded-md h-10 ${selectedFilter === "artist" ? "bg-green-700" : ""}`}
-            onClick={() => {
-              setSelectedFilter("artist");
-              search();
-              }}>
-            Artist
-          </button>
-        </div>
+    <div className="flex flex-col min-h-screen bg-blue-950 px-10"> 
+      <nav className="py-2">
+        <h1 className="text-center font-bold text-3xl">Spotify Deep Dive</h1>
+      </nav>
+      <div className="flex items-center justify-center mt-4">
+        <SearchBar onChange={handleSearchChange} onEnterPress = {search} />
+        <button className=" ml-2 px-2 bg-blue-500 text-white rounded-md h-10" onClick = {search}>Search</button>
+      </div>
+      <div className ="flex items-center justify-center py-2 ">
+        <h1>Filter Type: </h1>
+        <button className={`mx-1 px-2 bg-blue-500 text-white rounded-md h-10 ${selectedFilter === "song" ? "bg-blue-800 font-semibold" : ""}`}
+          onClick={() => {
+            setSelectedFilter("song");
+            search();
+            }}>
+          Song
+        </button>
+        <button className={`mx-1 px-2 bg-blue-500 text-white rounded-md h-10 ${selectedFilter === "album" ? "bg-blue-800 font-semibold" : ""}`}
+          onClick={() => {
+            setSelectedFilter("album");
+            search();
+            }}>
+          Album
+        </button>
+        <button className={`mx-1 px-2 bg-blue-500 text-white rounded-md h-10 ${selectedFilter === "artist" ? "bg-blue-800 font-semibold" : ""}`}
+          onClick={() => {
+            setSelectedFilter("artist");
+            search();
+            }}>
+          Artist
+        </button>
+      </div>
+      <main className="flex-1">
         <div className="flex flex-wrap justify-center gap-4">
           {searchInformation.map((currentSearch, index) => (
             <SongCard key={index} item={currentSearch} filterType={selectedFilter} />
           ))}
-          </div>
+        </div>
       </main>
+      <footer className="text-center py-4 text-white">Developed by Paul Ongkiko with Spotify Web API</footer>
     </div>
 
     )
