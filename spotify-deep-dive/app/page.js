@@ -96,14 +96,14 @@ const HomePage = () => {
   return (
     <div className="flex flex-col min-h-screen bg-blue-950 px-10"> 
       <nav className="py-2">
-        <h1 className="text-center font-bold text-3xl">Spotify Deep Dive</h1>
+        <h1 className="text-center font-bold text-3xl text-white">Spotify Deep Dive</h1>
       </nav>
       <div className="flex items-center justify-center mt-4">
         <SearchBar onChange={handleSearchChange} onEnterPress = {search} />
         <button className=" ml-2 px-2 bg-blue-500 text-white rounded-md h-10" onClick = {search}>Search</button>
       </div>
       <div className ="flex items-center justify-center py-2 ">
-        <h1>Filter Type: </h1>
+        <h1 className="text-white">Filter Type:</h1>
         <button className={`mx-1 px-2 bg-blue-500 text-white rounded-md h-10 ${selectedFilter === "song" ? "bg-blue-800 font-semibold" : ""}`}
           onClick={() => {
             setSelectedFilter("song");
